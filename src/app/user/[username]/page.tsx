@@ -1,15 +1,10 @@
-import Post from "./components/post";
+import Post from "../../components/post";
 import DarkIronTransmog from "@/app/images/DarkIronTransmog.png";
 import DarkIronTransmog3 from "@/app/images/DarkIronTransmog3.png";
-import Link from "next/link";
 
-
-export default async function Home() {
+export default function Page() {
   return (
-    <main className="mb-16">
-      <div className="border-b border-gray-300 py-3">
-        <Link href={"/create"} className="inline-block ml-16 rounded-3xl bg-orange-500 py-2 px-4 text-white font-semibold text-base">Create Post</Link>
-      </div>
+    <div className="mb-16">
       <Post
         id="strong_dark1"
         title="Dark Iron Warrior Legion"
@@ -30,6 +25,26 @@ export default async function Home() {
         date="Posted on 09/20/2024"
         image={DarkIronTransmog}
       />
-    </main>
+       <Post
+        id="dakr_2"
+        title="Dark Iron Spike Warrior"
+        username="DarkRod03"
+        url="https://www.wowhead.com/dressing-room#fv80z0zJ89c8Vy83p8Vn8dxP8Vx83E8Vt83Q8Vg83Z8Vv84m8o38348av8MmR8zYZ8dpU8Mtv877pOAx808PbB8MFU8OAG87VOAv808OAL808OAg808OAn808OAN808D5X87MOKR8ta87V"
+        comments={45}
+        likes={200}
+        date="Posted on 09/20/2024"
+        image={DarkIronTransmog}
+      />
+       <Post
+        id="dakr_2"
+        title="Dark Iron Spike Warrior"
+        username="DarkRod03"
+        url="https://www.wowhead.com/dressing-room#fv80z0zJ89c8Vy83p8Vn8dxP8Vx83E8Vt83Q8Vg83Z8Vv84m8o38348av8MmR8zYZ8dpU8Mtv877pOAx808PbB8MFU8OAG87VOAv808OAL808OAg808OAn808OAN808D5X87MOKR8ta87V"
+        comments={45}
+        likes={200}
+        date="Posted on 09/20/2024"
+        image={DarkIronTransmog}
+      />
+    </div>
   );
 }
