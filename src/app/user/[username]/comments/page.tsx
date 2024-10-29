@@ -1,4 +1,4 @@
-import UserComment from "@/app/components/user/comment";
+import UserComment from "@componets/user/comment";
 
 export default function Page() {
   return (

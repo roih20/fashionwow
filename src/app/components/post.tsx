@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import LikeButton from "@/app/components/buttons/likebtn";
-import { UsernameLink } from "./links";
+import LikeButton from "@componets/buttons/likebtn";
+import { UsernameLink } from "@componets/links";
 import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
 
 interface Props {

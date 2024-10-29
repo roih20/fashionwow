@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "./components/navbar";
-import DialogForm from "./components/dialogForm";
-import DialogFormSignUp from "./components/dialogFormSignUp";
+import Navbar from "@componets/navbar";
+
 
 
 export const metadata: Metadata = {
@@ -19,11 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="overflow-hidden">
         <Navbar />
-        <DialogForm />
-        <DialogFormSignUp />
-        <div className="mx-auto border-r border-l overflow-y-auto h-screen border-gray-300 max-w-[900px] hide-scrollbar">
+        <main className="mx-auto border-r border-l overflow-y-auto h-screen border-gray-300 max-w-[900px] hide-scrollbar">
            {children}
-        </div>
+        </main>
       </body>
     </html>
   );

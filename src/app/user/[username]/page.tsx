@@ -1,4 +1,4 @@
-import Post from "../../components/post";
+import Post from "@componets/post";
 import DarkIronTransmog from "@/app/images/DarkIronTransmog.png";
 import DarkIronTransmog3 from "@/app/images/DarkIronTransmog3.png";
 

@@ -21,3 +21,4 @@ export function PostLink({ postId, title }: { postId: string; title: string }) {
     </Link>
   );
 }
+
