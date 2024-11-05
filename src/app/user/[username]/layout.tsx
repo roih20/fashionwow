@@ -12,7 +12,7 @@ export default function ProfileLayout({
   const session = cookies().get("user");
   const user = session ? JSON.parse(session.value) : undefined;
   return (
-    <div className="w-full h-full ">
+    <>
       <div className="border-b border-gray-300 ">
         <div className="flex items-center justify-between my-5 mx-16">
           <h2 className="text-3xl font-bold">{params.username}</h2>
@@ -29,7 +29,7 @@ export default function ProfileLayout({
         </div>
         <SubNavbar username={params.username} />
       </div>
-      <section className="overflow-y-auto">{children}</section>
-    </div>
+      <section className="overflow-y-auto h-full mb-12">{children}</section>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 export default function CommentForm() {
   return (
-    <form className="mb-6 mt-2">
+    <form className="mb-6 mt-2 px-16">
       <textarea
         required
         rows={1}
@@ -11,7 +11,7 @@ export default function CommentForm() {
       />
       <button
         type="submit"
-        className="bg-orange-500 rounded-3xl px-2.5 py-1.5 text-white font-semibold border border-orange-600 self-end text-sm"
+        className="bg-orange-500 rounded-3xl px-4 py-2 text-white font-semibold border border-orange-600"
       >
         Comment
       </button>

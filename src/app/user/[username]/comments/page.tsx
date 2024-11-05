@@ -1,10 +1,13 @@
-import UserComment from "@componets/user/comment";
+import { getUserByUsername, getUserComments } from "@app/queries";
+import { UserCommentListSkeleton } from "@componets/skeletons";
+import UserCommentsList from "@componets/user/commentList";
+import { Suspense } from "react";
 
-export default function Page() {
+export default async function Page({ params }: { params: { username: string }}) {
+  const id: number = await getUserByUsername(params.username)
   return (
-    <div className="max-w-3xl mx-auto">
-      <UserComment />
-      <UserComment />
-    </div>
+    <Suspense fallback={<UserCommentListSkeleton />}>
+       <UserCommentsList id={id} />
+    </Suspense>
   );
 }

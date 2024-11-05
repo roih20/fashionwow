@@ -1,16 +1,15 @@
 import { HeartIcon } from "@heroicons/react/24/outline";
-import { PostLink } from "@componets/links";
+import Link from "next/link";
+import { UserComment as UserCommentType } from "@app/types";
 
 
-export default function UserComment() {
+export default function UserComment({comment} : { comment: UserCommentType}) {
   return (
-    <div className="border-b border-gray-300 hover:bg-gray-100">
-      <PostLink title="Dark Iron Spakies transmog" postId="dakr_2"/>
-      <p className="text-sm mb-1.5">Comment by the user</p>
-      <button className="flex items-center space-x-1.5 pb-3">
-        <HeartIcon width={18} height={18} className="" />
-        <span className="text-sm">3</span>
-      </button>
+    <div className="border-b border-gray-300 hover:bg-gray-100 px-16 py-4">
+      <Link href={`/post/${comment.post_id}`} className="inline-block pt-2.5 pb-2 text-xs hover:underline hover:cursor-pointer text-gray-800">
+        {comment.post_title}
+      </Link>
+      <p className="text-sm mb-1.5">{comment.comment_text}</p>
     </div>
   );
 }

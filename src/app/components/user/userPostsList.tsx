@@ -1,18 +1,14 @@
-import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
+import { getUserPosts } from "@app/queries";
+import { Post } from "@app/types";
 import LikeButton from "@componets/buttons/likebtn";
 import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
-import { Post as PostType } from "@app/types";
-
-export default function Post({ post }: { post: PostType }) {
+function UserPost({ post }: { post: Post }) {
   return (
-    <>
+    <article className="py-3.5 border-b border-gray-300 hover:bg-gray-50 px-16">
       <div className="flex flex-row items-center justify-between mb-3">
         <h2 className="text-2xl font-bold">{post.post_title}</h2>
-        <Link href={`/user/${post.username}`} className="text-sm font-bold hover:underline">
-          {post.username}
-        </Link>
       </div>
       <a
         href={post.wowhead_url}
@@ -43,6 +39,19 @@ export default function Post({ post }: { post: PostType }) {
         </div>
         <p className="text-sm">{post.posting_date.toLocaleDateString()}</p>
       </div>
+    </article>
+  );
+}
+
+export default async function UserPostsList({id }: { id: number}) {
+  const posts = await getUserPosts(id) as Post[]
+  return (
+    <>
+      {
+        posts?.map((post: Post) => (
+          <UserPost post={post} key={post.post_id} />
+        ))
+      }
     </>
   );
 }

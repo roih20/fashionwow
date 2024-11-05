@@ -75,6 +75,7 @@ export async function insertPost(prev: any, formData: FormData) {
     const wowheadUrl = formData.get("url") as string;
     const fileImage = formData.get("fileImage");
 
+    
     // Upload image logic
   } catch (error) {
     if (error instanceof Error)
@@ -83,6 +84,11 @@ export async function insertPost(prev: any, formData: FormData) {
       };
   }
 }
+
+export async function createComment(prev: any, formData: FormData) {
+  // Create comment logic
+}
+
 
 export async function logOut() {
   cookies().delete("user");
