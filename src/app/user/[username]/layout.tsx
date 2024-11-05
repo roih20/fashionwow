@@ -11,12 +11,13 @@ export default function ProfileLayout({
 }) {
   const session = cookies().get("user");
   const user = session ? JSON.parse(session.value) : undefined;
+  console.log(params)
   return (
     <>
       <div className="border-b border-gray-300 ">
         <div className="flex items-center justify-between my-5 mx-16">
           <h2 className="text-3xl font-bold">{params.username}</h2>
-          {user.username === params.username  && (
+          {user && user.username === params.username  && (
             <form action={logOut}>
               <button
                 type="submit"
