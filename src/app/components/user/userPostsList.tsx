@@ -45,13 +45,10 @@ function UserPost({ post }: { post: Post }) {
 
 export default async function UserPostsList({id }: { id: number}) {
   const posts = await getUserPosts(id) as Post[]
+  const postList = posts?.map((post: Post) => (
+    <UserPost post={post} key={post.post_id} />
+  ))
   return (
-    <>
-      {
-        posts?.map((post: Post) => (
-          <UserPost post={post} key={post.post_id} />
-        ))
-      }
-    </>
+    <>{postList}</>
   );
 }

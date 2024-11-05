@@ -7,7 +7,7 @@ export type Post = {
 };
 
 export type Comment = {
-  coment_id: number;
+  comment_id: number;
   comment_text: string;
   comment_date: Date;
   username: string;

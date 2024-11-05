@@ -22,7 +22,6 @@ export function PostSkeleton() {
 export function PostsListSkeleton() {
   return (
     <>
-      {/* Skeleton HTML / CSS */}
       <PostSkeleton />
       <PostSkeleton />
       <PostSkeleton />
@@ -49,13 +48,25 @@ export function CommentListSkeleton() {
       <CommentSkeleton />
       <CommentSkeleton />
     </section>
-  )
+  );
 }
 
 export function UsersCommentSkeleton() {
-  return <div>{/* Skeleton HTML/CSS */}</div>;
+  return (
+    <div className="border-b border-gray-300 hover:bg-gray-100 px-16 py-5">
+      <div className="flex items-center space-x-2">
+        <div className="rounded-full bg-gray-300 w-28 py-2"></div>
+        <div className="rounded-full bg-gray-300 w-20 py-2"></div>
+      </div>
+      <div className="rounded-full bg-gray-300 w-40 py-2 mt-4"></div>
+    </div>
+  );
 }
 
 export function UserCommentListSkeleton() {
-  return <div>{/* Skeleton HTML / CSS */}</div>;
+  return <>
+    <UsersCommentSkeleton />
+    <UsersCommentSkeleton />
+    <UsersCommentSkeleton />
+  </>;
 }
