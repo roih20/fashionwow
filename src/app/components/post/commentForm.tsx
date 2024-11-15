@@ -1,6 +1,13 @@
-export default function CommentForm() {
+import { createComment } from "@app/actions";
+import { cookies } from "next/headers";
+
+
+export default function CommentForm({ postId }: { postId: number }) {
+  const insertComment = createComment.bind(null, postId)
+  const session = cookies().get("user")
+  const isUserLoggedIn = session ? true : false
   return (
-    <form className="mb-6 mt-2 px-16">
+    <form className="mb-6 mt-2 px-16" action={insertComment}>
       <textarea
         required
         rows={1}
@@ -11,7 +18,8 @@ export default function CommentForm() {
       />
       <button
         type="submit"
-        className="bg-orange-500 rounded-3xl px-4 py-2 text-white font-semibold border border-orange-600"
+        disabled={!isUserLoggedIn}
+        className="bg-orange-500 rounded-3xl px-4 py-2 text-white font-semibold border border-orange-600 disabled:bg-orange-300 disabled:border-orange-400 disabled:hover:cursor-not-allowed"
       >
         Comment
       </button>

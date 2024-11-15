@@ -4,11 +4,16 @@ import {
   findUserByEmail,
   findUserByUsername,
   getUserByEmail,
+  getUserIdByUsername,
+  insertComment,
+  insertPost,
   insertUser,
-} from "@app/queries";
+} from "@app/utils/queries";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import fs from "node:fs/promises";
+import { use } from "react";
 
 export async function singUp(prevState: any, formData: FormData) {
   try {
@@ -63,30 +68,56 @@ export async function signIn(prevState: any, formData: FormData) {
   redirect("/");
 }
 
-export async function insertPost(prev: any, formData: FormData) {
+export async function createPost(prev: any, formData: FormData) {
   try {
-    const session = cookies().get("user");
-    const userSession = session ? JSON.parse(session.value) : undefined;
-    const { email } = userSession;
 
-    const user = await getUserByEmail(email);
+    const session = cookies().get("user")
 
-    const title = formData.get("title") as string;
-    const wowheadUrl = formData.get("url") as string;
-    const fileImage = formData.get("fileImage");
+    const user = session && JSON.parse(session.value)
 
-    
-    // Upload image logic
+    const userId = await getUserIdByUsername(user.username)
+
+    const title = formData.get('title') as string
+    const transmogUrl = formData.get('transmogUrl') as string
+    const filePath = formData.get('filePath') as string
+
+
+    await insertPost(title, transmogUrl, filePath, userId)
+
+    console.log('Post uploaded successfully', {
+      title,
+      transmogUrl,
+      filePath,
+      userId
+    })
+
   } catch (error) {
     if (error instanceof Error)
       return {
         message: error.message,
       };
   }
+
+  revalidatePath('/')
 }
 
-export async function createComment(prev: any, formData: FormData) {
+export async function createComment(postId: number, formData:  FormData) {
   // Create comment logic
+  try {
+    const session = cookies().get("user")
+    
+    if (session) {
+      const user = JSON.parse(session.value)
+      const commentText = formData.get("comment") as string
+      await insertComment(commentText, user.id , postId)
+    }
+
+
+  } catch (error) {
+    if (error instanceof Error) { console.log(error.message) }
+  }
+
+  revalidatePath("/")
 }
 
 
@@ -95,3 +126,4 @@ export async function logOut() {
   revalidatePath("/");
   redirect("/");
 }
+

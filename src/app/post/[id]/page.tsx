@@ -1,17 +1,12 @@
-import LikeButton from "@componets/buttons/likebtn";
-import Comment from "@componets/post/comment";
 import CommentForm from "@componets/post/commentForm";
-import DarkIronTransmog from "@/app/images/DarkIronTransmog.png";
-import { ChatBubbleBottomCenterIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
 import { Suspense } from "react";
 import CommentList from "@componets/post/commentList";
-import { getPostById } from "@app/queries";
+import { getPostById } from "@app/utils/queries";
 import Post from "@componets/post";
-import { Post as TypePost} from "@app/types"
+import { Post as TypePost} from "@app/utils/types"
 import { CommentListSkeleton, PostSkeleton } from "@componets/skeletons";
 
-export default async function Page({params} : {params: {id: number}}) {
+export default async function Page({ params } : {params: {id: number}}) {
   const post = await getPostById(params.id) as TypePost
   return (
     <>
@@ -20,7 +15,7 @@ export default async function Page({params} : {params: {id: number}}) {
           <Post post={post} />
         </article>
       </Suspense>
-      <CommentForm />
+      <CommentForm postId={params.id}/>
       <Suspense fallback={<CommentListSkeleton />}>
         <CommentList postId={params.id}/>
       </Suspense>

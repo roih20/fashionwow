@@ -4,6 +4,7 @@ export type Post = {
   posting_date: Date;
   wowhead_url: string;
   username: string;
+  file_path: string;
 };
 
 export type Comment = {
