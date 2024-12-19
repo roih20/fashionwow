@@ -1,6 +1,6 @@
-import { getUserPosts } from "@app/utils/queries";
-import { Post as TypePost } from "@app/utils/types";
-import Post from "@componets/post";
+import { getUserPosts } from "@utils/queries";
+import { Post as TypePost } from "@utils/types";
+import Post from "@componets/post/post";
 
 export default async function UserPostsList({id }: { id: number}) {
   const posts = await getUserPosts(id) as TypePost[]

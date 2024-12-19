@@ -3,6 +3,8 @@ import { UserCommentListSkeleton } from "@componets/skeletons";
 import UserCommentsList from "@componets/user/commentList";
 import { Suspense } from "react";
 
+
+
 export default async function Page({ params }: { params: { username: string }}) {
   const id: number = await getUserIdByUsername(params.username)
   return (

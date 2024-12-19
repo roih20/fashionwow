@@ -1,18 +1,16 @@
-import { cookies } from "next/headers";
+import { userData } from "@utils/session";
 import Link from "next/link";
 
 export default function Navbar() {
-  const session = cookies().get("user");
-  const user = session ? JSON.parse(session.value) : undefined
+  const user = userData()
   return (
     <nav className="h-16 py-2 border border-gray-300">
       <div className="mx-auto max-w-screen-xl flex items-center justify-between">
-        <Link href="/" className="font-semibold text-3xl text-gray-800">
+        <Link href="/" className="font-medium text-3xl text-slate-800">
           Fashion WoW
         </Link>
-
         {user ? (
-          <Link className="text-lg hover:underline" href={`/user/${user.username}`}>{user.username}</Link>
+          <Link className="text-lg text-slate-700 hover:text-blue-900" href={`/user/${user.username}`}>{user.username}</Link>
         ) : (
           <Link
             href="/signIn"

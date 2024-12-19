@@ -12,6 +12,7 @@
     "@heroicons/react": "^2.1.5",
     "@neondatabase/serverless": "^0.10.1",
     "@uploadthing/react": "^7.1.1",
+    "cloudinary": "^2.5.1",
     "next": "14.2.13",
     "react": "^18",
     "react-dom": "^18",

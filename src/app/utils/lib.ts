@@ -1,5 +1,4 @@
 
-
 export function calculateTimeBetweenDates(date: Date) {
   const commentPostDate = new Date(date).getTime()
   const currentDate = new Date().getTime()
@@ -21,3 +20,4 @@ export function calculateTimeBetweenDates(date: Date) {
     return `posted on ${date.toLocaleDateString()}`
   }
 }
+

@@ -1,9 +1,9 @@
-import CommentForm from "@componets/post/commentForm";
+import CommentForm from "@componets/comment/commentForm";
 import { Suspense } from "react";
-import CommentList from "@componets/post/commentList";
-import { getPostById } from "@app/utils/queries";
-import Post from "@componets/post";
-import { Post as TypePost} from "@app/utils/types"
+import CommentList from "@componets/comment/commentList";
+import { getPostById } from "@utils/queries";
+import Post from "@componets/post/post";
+import { Post as TypePost} from "@utils/types"
 import { CommentListSkeleton, PostSkeleton } from "@componets/skeletons";
 
 export default async function Page({ params } : {params: {id: number}}) {

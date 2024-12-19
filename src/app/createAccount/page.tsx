@@ -16,16 +16,16 @@ export default function Page() {
       <h3 className="text-xl font-medium my-4">Sign Up</h3>
       {
         state?.message  && (
-          <p className="text-red-500 font-semibold">{state.message}</p>
+          <p className="text-pink-600 text-sm">{state.message}</p>
         )
       }
-      <form className="flex flex-col w-full space-y-4" action={formAction}>
+      <form className="flex flex-col w-full" action={formAction}>
         <Input type="text" name="username" labelName="Username" />
-        <Input type="email" name="email" labelName="Email" />
-        <Input type="password" name="password" labelName="Password" />
+        <Input type="email" name="email" labelName="Email" style="mt-2" />
+        <Input type="password" name="password" labelName="Password" style="mt-2" />
         <button
           type="submit"
-          className="w-full mt-3 py-1.5 border border-orange-600 rounded-2xl text-white bg-orange-500 font-semibold"
+          className="w-full mt-4 py-2 border border-orange-600 rounded-full text-white bg-orange-500 font-semibold"
         >
           <span>Create Account</span>
         </button>

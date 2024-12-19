@@ -1,7 +1,5 @@
 import { sql } from "../db";
 
-
-
 export async function insertUser(
   username: string,
   email: string,
@@ -17,16 +15,20 @@ export async function insertUser(
   }
 }
 
-export async function insertPost(title: string, url: string, filePath: string, userId: number) {
+export async function insertPost(
+  title: string,
+  url: string,
+  filePath: string,
+  userId: number
+) {
   try {
     await sql(
       "INSERT INTO posts (post_title, wowhead_url, file_path, user_id) VALUES ($1, $2, $3, $4)",
       [title, url, filePath, userId]
-    )
+    );
   } catch (error) {
-    if (error instanceof Error) console.log(error.message)
+    if (error instanceof Error) console.log(error.message);
   }
-
 }
 
 export async function findUserByEmail(email: string) {
@@ -60,7 +62,7 @@ export async function findUserById(id: string) {
 
 export async function getUserByEmail(email: string) {
   try {
-    const user = await sql("SELECT * FROM users WHERE email = $1", [email]);
+    const user = await sql("SELECT id, username, email, password FROM users WHERE email = $1", [email]);
     return user[0];
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
@@ -81,7 +83,9 @@ export async function getUserIdByUsername(username: string) {
 export async function getUserPosts(userId: number) {
   try {
     const posts = await sql(
-      `SELECT post_id, post_title, posting_date, wowhead_url, file_path FROM posts WHERE user_id = $1`,
+      `SELECT p.post_id, p.user_id, p.post_title, p.posting_date, p.wowhead_url, p.file_path, u.username 
+       FROM posts p INNER JOIN users u ON u.id = p.user_id 
+       WHERE p.user_id = $1 ORDER BY p.posting_date DESC`,
       [userId]
     );
     return posts;
@@ -95,10 +99,12 @@ export async function getUserId() {}
 export async function getUserComments(userId: number) {
   try {
     const comments = await sql(
-      `SELECT c.comment_id, c.comment_text, c.comment_date, p.post_id, p.post_title FROM post_comments c INNER join posts p ON p.post_id = c.post_id WHERE c.user_id = $1`,
+      `SELECT c.comment_id, c.user_id, c.comment_text, c.comment_date, p.post_id, p.post_title 
+       FROM post_comments c INNER join posts p ON p.post_id = c.post_id 
+       WHERE c.user_id = $1 ORDER BY c.comment_date DESC`,
       [userId]
     );
-    return comments
+    return comments;
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
   }
@@ -107,7 +113,8 @@ export async function getUserComments(userId: number) {
 export async function getAllPosts() {
   try {
     const posts = await sql(
-      "SELECT p.post_id, p.post_title, p.posting_date, p.wowhead_url, p.file_path,  u.username FROM posts p INNER JOIN users u ON u.id = p.user_id"
+      `SELECT p.post_id, p.user_id, p.post_title, p.posting_date, p.wowhead_url, p.file_path, u.username 
+       FROM posts p INNER JOIN users u ON u.id = p.user_id ORDER BY p.posting_date DESC`
     );
     return posts;
   } catch (error) {
@@ -118,7 +125,8 @@ export async function getAllPosts() {
 export async function getPostById(postId: number) {
   try {
     const post = await sql(
-      `SELECT p.post_id, p.post_title, p.posting_date, p.wowhead_url, p.file_path, u.username FROM posts p INNER JOIN users u ON u.id = p.user_id WHERE p.post_id = $1`,
+      `SELECT p.post_id, p.user_id, p.post_title, p.posting_date, p.wowhead_url, p.file_path, u.username 
+       FROM posts p INNER JOIN users u ON u.id = p.user_id WHERE p.post_id = $1`,
       [postId]
     );
     return post[0];
@@ -127,10 +135,20 @@ export async function getPostById(postId: number) {
   }
 }
 
+export async function deletePostById(postId: number) {
+  try {
+    await sql(`DELETE FROM posts WHERE post_id = $1`, [postId]);
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message);
+  }
+}
+
 export async function getPostComments(postId: number) {
   try {
     const comments = await sql(
-      `SELECT c.comment_id, c.comment_text, c.comment_date, u.username FROM post_comments c INNER JOIN users u ON u.id = c.user_id WHERE c.post_id = $1`,
+      `SELECT c.comment_id, c.user_id, c.comment_text, c.comment_date, u.username
+       FROM post_comments c INNER JOIN users u ON u.id = c.user_id 
+       WHERE c.post_id = $1 ORDER BY c.comment_date DESC`,
       [postId]
     );
     return comments;
@@ -144,18 +162,45 @@ export async function getNumberOfCommentsByPost(postId: number) {
     const totalComments = await sql(
       `SELECT COUNT(*) AS total_comments FROM post_comments WHERE post_id = $1`,
       [postId]
+    );
+    return totalComments[0].total_comments;
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message);
+  }
+}
+
+export async function insertComment(
+  commentText: string,
+  userId: number,
+  postId: number
+) {
+  try {
+    await sql(
+      "INSERT INTO post_comments (comment_text, user_id, post_id) VALUES ($1, $2, $3)",
+      [commentText, userId, postId]
+    );
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message);
+  }
+}
+
+
+export async function deletePostCommentById(commentId: number) {
+  try {
+    await sql(
+      'DELETE FROM post_comments WHERE comment_id = $1',
+      [commentId]
     )
-    return totalComments[0].total_comments
   } catch (error) {
     if (error instanceof Error) console.log(error.message)
   }
 }
 
-export async function insertComment(commentText: string, userId: number, postId: number) {
+export async function updatePostCommentById(comment: string, commentId: number) {
   try {
     await sql(
-      "INSERT INTO post_comments (comment_text, user_id, post_id) VALUES ($1, $2, $3)",
-      [commentText, userId, postId]
+      `UPDATE post_comments SET comment_text = $1 WHERE comment_id = $2`,
+      [comment, commentId]
     )
   } catch (error) {
     if (error instanceof Error) console.log(error.message)

@@ -1,6 +1,6 @@
-import { getPostComments } from "@app/utils/queries"
-import Comment from "./comment"
-import { Comment as TypeComment } from "@app/utils/types"
+import { getPostComments } from "@utils/queries"
+import Comment from "@componets/comment/comment"
+import { Comment as TypeComment } from "@utils/types"
 
 export default async function CommentList({ postId }: {postId: number}) {
   const comments = await getPostComments(postId) as TypeComment[]
