@@ -130,12 +130,6 @@ export async function createPost(formData: FormData) {
             quality: 'auto',
             fetch_format: 'auto'
           },
-          {
-            width: 800,
-            height: 800,
-            crop: 'fill',
-            gravity: 'auto'
-          }
         ]
       })
     })

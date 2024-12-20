@@ -9,7 +9,18 @@ export default async function CommentList({ postId }: {postId: number}) {
   const commentList = comments?.map((comment: TypeComment) => (
     <Comment key={comment.comment_id} comment={comment} user={user}/>
   ))
+
+  if (comments.length === 0) {
+    return (
+      <section className="flex flex-col items-center justify-center h-36">
+        <div className="text-xl font-medium text-slate-800">
+          No comments yet.
+        </div>
+      </section>
+    )
+  }
+
   return (
-    <section className="my-16 space-y-8">{commentList}</section>
+    <section className="mt-8 mb-20">{commentList}</section>
   )
 }

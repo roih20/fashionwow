@@ -10,7 +10,7 @@ import { useState } from "react";
 export default function Comment({ comment, user }: { comment: TypeComment, user: User | null}) {
   const [showForm, setShowForm] = useState(false)
   return (
-    <div className="px-16">
+    <div className="px-16 mb-3">
       <div className="flex flex-row space-x-3 items-center mb-2">
         <Link href={`/user/${comment.username}`} className="text-sm font-medium text-slate-800 hover:text-blue-800 hover:cursor-pointer">{comment.username}</Link>
         <p className="text-gray-700 text-sm">{calculateTimeBetweenDates(comment.comment_date)}</p>

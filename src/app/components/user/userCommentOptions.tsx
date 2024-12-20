@@ -13,7 +13,7 @@ export default function UserCommentOptions({
   return (
     <div className="relative group">
       {/* button */}
-      <button className="hover:bg-gray-300 hover:cursor-pointer rounded-full px-1 py-0.5 focus:ring-1 focus:ring-gray-300 focus:bg-gray-300">
+      <button className="hover:bg-gray-300 hover:cursor-pointer rounded-full flex items-center p-1 focus:ring-1 focus:ring-gray-300 focus:bg-gray-300">
         <EllipsisHorizontalIcon className="h-5 w-5" />
       </button>
 

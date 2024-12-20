@@ -47,7 +47,7 @@ export default async function ProfileLayout({
         </div>
         <SubNavbar username={params.username} />
       </div>
-      <section className="min-h-screen mb-16">{children}</section>
+      <section className="mb-16">{children}</section>
     </>
   );
 }
