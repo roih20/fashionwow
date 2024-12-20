@@ -29,5 +29,5 @@ export type UserComment = {
 export type User = {
   id: number;
   username: string;
-  password: string
+  password: string;
 }

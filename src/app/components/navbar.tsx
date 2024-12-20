@@ -1,5 +1,7 @@
 import { userData } from "@utils/session";
 import Link from "next/link";
+import SearchBar from "./searchbar";
+import Finder from "./findex";
 
 export default function Navbar() {
   const user = userData()
@@ -9,6 +11,10 @@ export default function Navbar() {
         <Link href="/" className="font-medium text-3xl text-slate-800">
           Fashion WoW
         </Link>
+        <div className="relative group w-full max-w-lg">
+           <SearchBar />
+           <Finder />
+        </div>
         {user ? (
           <Link className="text-lg text-slate-700 hover:text-blue-900" href={`/user/${user.username}`}>{user.username}</Link>
         ) : (

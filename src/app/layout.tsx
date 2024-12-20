@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
+  children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="overflow-hidden">
         <Navbar />
-        <main className="mx-auto border-r border-l overflow-y-auto h-screen border-gray-300 max-w-[900px] hide-scrollbar">
+        <main className="mx-auto border-r border-l h-screen border-gray-300 max-w-[900px] overflow-y-auto hide-scrollbar">
            {children}
         </main>
       </body>

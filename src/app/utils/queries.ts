@@ -1,4 +1,5 @@
 import { sql } from "../db";
+import { Post, User } from "./types";
 
 export async function insertUser(
   username: string,
@@ -45,7 +46,7 @@ export async function findUserByUsername(username: string) {
     const response = await sql("SELECT * FROM users WHERE username = $1", [
       username,
     ]);
-    return response.length === 0 ? false : true;
+    return response?.length === 0 ? false : true;
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
   }
@@ -62,7 +63,10 @@ export async function findUserById(id: string) {
 
 export async function getUserByEmail(email: string) {
   try {
-    const user = await sql("SELECT id, username, email, password FROM users WHERE email = $1", [email]);
+    const user = await sql(
+      "SELECT id, username, email, password FROM users WHERE email = $1",
+      [email]
+    );
     return user[0];
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
@@ -105,6 +109,20 @@ export async function getUserComments(userId: number) {
       [userId]
     );
     return comments;
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message);
+  }
+}
+
+export async function getUsersByUsername(term: string) {
+  try {
+    if (!term) return [];
+
+    const users = await sql(
+      `SELECT username FROM users WHERE username LIKE $1`,
+      [`${term}%`]
+    );
+    return users;
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
   }
@@ -184,25 +202,24 @@ export async function insertComment(
   }
 }
 
-
 export async function deletePostCommentById(commentId: number) {
   try {
-    await sql(
-      'DELETE FROM post_comments WHERE comment_id = $1',
-      [commentId]
-    )
+    await sql("DELETE FROM post_comments WHERE comment_id = $1", [commentId]);
   } catch (error) {
-    if (error instanceof Error) console.log(error.message)
+    if (error instanceof Error) console.log(error.message);
   }
 }
 
-export async function updatePostCommentById(comment: string, commentId: number) {
+export async function updatePostCommentById(
+  comment: string,
+  commentId: number
+) {
   try {
     await sql(
       `UPDATE post_comments SET comment_text = $1 WHERE comment_id = $2`,
       [comment, commentId]
-    )
+    );
   } catch (error) {
-    if (error instanceof Error) console.log(error.message)
+    if (error instanceof Error) console.log(error.message);
   }
 }
