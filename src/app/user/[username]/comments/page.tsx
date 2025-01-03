@@ -3,7 +3,7 @@ import { UserCommentListSkeleton } from "@componets/skeletons";
 import UserCommentsList from "@componets/user/commentList";
 import { Suspense } from "react";
 
-
+export const dynamic = 'force-dynamic'
 
 export default async function Page({ params }: { params: { username: string }}) {
   const id: number = await getUserIdByUsername(params.username)

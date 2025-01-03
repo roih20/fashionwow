@@ -1,9 +1,8 @@
 import { userData } from "@utils/session";
 import Link from "next/link";
-import SearchBar from "./searchbar";
-import Finder from "./findex";
 
-export default function Navbar() {
+
+export default async function Navbar() {
   const user = userData()
   return (
     <nav className="h-16 py-2 border border-gray-300">
@@ -11,10 +10,6 @@ export default function Navbar() {
         <Link href="/" className="font-medium text-3xl text-slate-800">
           Fashion WoW
         </Link>
-        <div className="relative group w-full max-w-lg">
-           <SearchBar />
-           <Finder />
-        </div>
         {user ? (
           <Link className="text-lg text-slate-700 hover:text-blue-900" href={`/user/${user.username}`}>{user.username}</Link>
         ) : (

@@ -114,8 +114,9 @@ export async function getUserComments(userId: number) {
   }
 }
 
-export async function getUsersByUsername(term: string) {
+export async function getUsersByUsername(term: string | null) {
   try {
+
     if (!term) return [];
 
     const users = await sql(
