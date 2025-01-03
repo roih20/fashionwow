@@ -3,7 +3,6 @@ import { PostsListSkeleton } from "@componets/skeletons";
 import UserPostsList from "@componets/user/userPostsList";
 import { Suspense } from "react";
 
-export const revalidate = 5000
 
 export default async function Page({
   params,

@@ -1,4 +1,5 @@
 import { sql } from "../db";
+import { unstable_noStore as noStore } from 'next/cache'
 
 export async function insertUser(
   username: string,
@@ -84,6 +85,7 @@ export async function getUserIdByUsername(username: string) {
 }
 
 export async function getUserPosts(userId: number) {
+  noStore()
   try {
     const posts = await sql(
       `SELECT p.post_id, p.user_id, p.post_title, p.posting_date, p.wowhead_url, p.file_path, u.username 
@@ -100,6 +102,7 @@ export async function getUserPosts(userId: number) {
 export async function getUserId() {}
 
 export async function getUserComments(userId: number) {
+  noStore()
   try {
     const comments = await sql(
       `SELECT c.comment_id, c.user_id, c.comment_text, c.comment_date, p.post_id, p.post_title 
@@ -114,6 +117,7 @@ export async function getUserComments(userId: number) {
 }
 
 export async function getUsersByUsername(term: string | null) {
+  noStore()
   try {
 
     if (!term) return [];
@@ -129,6 +133,7 @@ export async function getUsersByUsername(term: string | null) {
 }
 
 export async function getAllPosts() {
+  noStore()
   try {
     const posts = await sql(
       `SELECT p.post_id, p.user_id, p.post_title, p.posting_date, p.wowhead_url, p.file_path, u.username 
@@ -162,6 +167,7 @@ export async function deletePostById(postId: number) {
 }
 
 export async function getPostComments(postId: number) {
+  noStore()
   try {
     const comments = await sql(
       `SELECT c.comment_id, c.user_id, c.comment_text, c.comment_date, u.username
