@@ -56,7 +56,7 @@ export async function singUp(prevState: any, formData: FormData) {
   }
 
   revalidatePath("/");
-  redirect("/");
+  redirect("/signIn");
 }
 
 export async function signIn(prevState: any, formData: FormData) {
