@@ -1,5 +1,4 @@
 import { sql } from "../db";
-import { Post, User } from "./types";
 
 export async function insertUser(
   username: string,

@@ -5,8 +5,8 @@ import Link from "next/link";
 export default async function Navbar() {
   const user = userData()
   return (
-    <nav className="h-16 py-2 border border-gray-300">
-      <div className="mx-auto max-w-screen-xl flex items-center justify-between">
+    <nav className="h-20 py-2 border border-gray-300 flex items-center">
+      <div className="flex items-center justify-between max-w-[82rem] w-full mx-auto">
         <Link href="/" className="font-medium text-3xl text-slate-800">
           Fashion WoW
         </Link>
