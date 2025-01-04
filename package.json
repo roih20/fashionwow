@@ -13,10 +13,11 @@
     "@neondatabase/serverless": "^0.10.1",
     "@uploadthing/react": "^7.1.1",
     "cloudinary": "^2.5.1",
-    "next": "14.2.13",
+    "next": "^14.2.22",
     "react": "^18",
     "react-dom": "^18",
-    "uploadthing": "^7.3.0"
+    "uploadthing": "^7.3.0",
+    "use-debounce": "^10.0.4"
   },
   "devDependencies": {
     "@types/node": "^20",

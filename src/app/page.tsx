@@ -2,8 +2,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 import PostsList from "@componets/post/postsList";
 import { PostsListSkeleton } from "@componets/skeletons";
-import { userData } from "@utils/session";
-
 
 export default async function Home() {
   return (

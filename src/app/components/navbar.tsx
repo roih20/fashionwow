@@ -1,5 +1,8 @@
 import { userData } from "@utils/session";
+import SearchResult from "./searchResult";
 import Link from "next/link";
+import SearchBar from "./searchBar";
+
 
 
 export default async function Navbar() {
@@ -10,6 +13,10 @@ export default async function Navbar() {
         <Link href="/" className="font-medium text-3xl text-slate-800">
           Fashion WoW
         </Link>
+        <div className="group relative w-full max-w-lg">
+          <SearchBar />
+          <SearchResult username=""/>
+        </div>
         {user ? (
           <Link className="text-lg text-slate-700 hover:text-blue-900" href={`/user/${user.username}`}>{user.username}</Link>
         ) : (

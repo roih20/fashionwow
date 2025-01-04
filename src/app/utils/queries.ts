@@ -116,7 +116,7 @@ export async function getUserComments(userId: number) {
   }
 }
 
-export async function getUsersByUsername(term: string | null) {
+export async function getUsersByUsername(term: string) {
   noStore()
   try {
 
@@ -182,6 +182,7 @@ export async function getPostComments(postId: number) {
 }
 
 export async function getNumberOfCommentsByPost(postId: number) {
+  noStore()
   try {
     const totalComments = await sql(
       `SELECT COUNT(*) AS total_comments FROM post_comments WHERE post_id = $1`,

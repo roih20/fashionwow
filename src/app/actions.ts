@@ -7,6 +7,7 @@ import {
   findUserByUsername,
   getUserByEmail,
   getUserIdByUsername,
+  getUsersByUsername,
   insertComment,
   insertPost,
   insertUser,
@@ -41,6 +42,7 @@ export async function singUp(prevState: any, formData: FormData) {
     const password = formData.get("password") as string;
 
     await insertUser(username, email, password);
+
   } catch (error) {
     if (error instanceof UsernameNotAvailable) {
       return {
@@ -51,8 +53,6 @@ export async function singUp(prevState: any, formData: FormData) {
         message: error.message
       }
     }
-
-
   }
 
   revalidatePath("/");
@@ -209,3 +209,12 @@ export async function logOut() {
   redirect("/");
 }
 
+
+export async function getSearchResult(username: string) {
+  try {
+    const users = await getUsersByUsername(username)
+    return users
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message)
+  }
+}
